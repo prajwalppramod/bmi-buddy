@@ -10,4 +10,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.App {
+  /* Change the CSS specificity of this element to be lower than the CSS specificity of the BMICalculator component */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 

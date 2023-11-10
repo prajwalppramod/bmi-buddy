@@ -26,7 +26,7 @@ function Design() {
                 options={{
                     background: {
                         color: {
-                            value: "#0d47a1",
+                            value: "#192436",
                         },
                     },
                     fpsLimit: 120,
@@ -38,7 +38,7 @@ function Design() {
                             },
                             onHover: {
                                 enable: true,
-                                mode: "repulse",
+                                mode: "grab",
                             },
                             resize: true,
                         },
@@ -54,7 +54,7 @@ function Design() {
                     },
                     particles: {
                         color: {
-                            value: "#ffffff",
+                            value: "#DAB38C",
                         },
                         links: {
                             color: "#ffffff",
@@ -70,7 +70,7 @@ function Design() {
                                 default: "bounce",
                             },
                             random: false,
-                            speed: 6,
+                            speed: 2,
                             straight: false,
                         },
                         number: {

@@ -3,16 +3,18 @@ import React, { useState } from 'react';
 function BMICalculator() {
   console.log('BMICalculator component is rendered');
 
-  const [gender, setGender] = useState('male');
   const [height, setHeight] = useState(0);
+  const [feet, setFeet] = useState(0);
+  const [inches, setInches] = useState(0);
+  const [heightUnit, setHeightUnit] = useState('cm');
   const [weight, setWeight] = useState(0);
+  const [weightUnit, setWeightUnit] = useState('kg');
   const [bmi, setBMI] = useState(null);
   const [bmiCategory, setBMICategory] = useState(null);
 
   const handleCalculateBMI = () => {
-    // Calculate BMI here and update the state
-    const heightInMeters = height/100;
-    const weightInKg = weight;
+    const heightInMeters = heightUnit === 'cm' ? height / 100 : ((feet * 0.3048) + (inches * 0.0254));
+    const weightInKg = weightUnit === 'kg' ? weight : (weight / 2.20462); // Convert pounds to kg
     const bmiValue = weightInKg / (heightInMeters * heightInMeters);
 
     setBMI(bmiValue);
@@ -32,6 +34,7 @@ function BMICalculator() {
   };
 
   const getTips = (category) => {
+    // Your tips logic based on BMI category
     switch (category) {
       case 'Underweight':
         return 'Tips: To gain weight, focus on a balanced diet with an emphasis on protein and healthy fats. Consult with a nutritionist for personalized advice.';
@@ -51,34 +54,58 @@ function BMICalculator() {
       <div className="p-4 z-10 w-4/5 md:w-6/12 mx-auto backdrop-blur bg-cyan-600/30 shadow-md rounded-md">
         <h2 className="text-3xl text-white text-center font-semibold mb-4">BMI Buddy</h2>
         <form>
-          {/* <div className="mb-4">
-            <label className="block font-semibold text-white">Gender:</label>
-            <select
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-              className="w-full p-2  backdrop-blur bg-white/80 text-center rounded-md focus:outline-none focus:ring focus:border-blue-300"
-            >
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-          </div> */}
           <div className="mb-4">
-            <label className="block font-semibold text-white">Height (centimeters):</label>
-            <input
-              type="number"
-              value={height}
-              onChange={(e) => setHeight(e.target.value)}
-              className="w-full p-2 backdrop-blur bg-white/80 text-center border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block font-semibold text-white">Weight (kg):</label>
+            <label className="block font-semibold text-white">Weight:</label>
             <input
               type="number"
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
-              className="w-full text-center p-2 backdrop-blur bg-white/80 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              className="w-full p-2 backdrop-blur bg-white/80 text-center border rounded-md focus:outline-none focus:ring focus:border-blue-300"
             />
+            <select
+              value={weightUnit}
+              onChange={(e) => setWeightUnit(e.target.value)}
+              className="w-full p-2 mt-2 backdrop-blur bg-white/80 text-center rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            >
+              <option value="kg">kg</option>
+              <option value="lbs">lbs</option>
+            </select>
+          </div>
+          <div className="mb-4">
+            <label className="block font-semibold text-white">Height:</label>
+            {heightUnit === 'cm' ? (
+              <input
+                type="number"
+                value={height}
+                onChange={(e) => setHeight(e.target.value)}
+                className="w-full p-2 backdrop-blur bg-white/80 text-center border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              />
+            ) : (
+              <div className="flex">
+                <input
+                  type="number"
+                  value={feet}
+                  onChange={(e) => setFeet(e.target.value)}
+                  placeholder="Feet"
+                  className="w-1/2 p-2 mr-2 backdrop-blur bg-white/80 text-center border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                />
+                <input
+                  type="number"
+                  value={inches}
+                  onChange={(e) => setInches(e.target.value)}
+                  placeholder="Inch"
+                  className="w-1/2 p-2 backdrop-blur bg-white/80 text-center border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                />
+              </div>
+            )}
+            <select
+              value={heightUnit}
+              onChange={(e) => setHeightUnit(e.target.value)}
+              className="w-full p-2 mt-2 backdrop-blur bg-white/80 text-center rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            >
+              <option value="cm">cm</option>
+              <option value="ft">ft/in</option>
+            </select>
           </div>
           <button
             type="button"

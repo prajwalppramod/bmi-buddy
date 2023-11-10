@@ -34,23 +34,39 @@ function BMICalculator() {
   };
 
   const getTips = (category) => {
-    // Your tips logic based on BMI category
     switch (category) {
       case 'Underweight':
-        return 'Tips: To gain weight, focus on a balanced diet with an emphasis on protein and healthy fats. Consult with a nutritionist for personalized advice.';
+        return `<div className="mx-auto">
+            <p>Tips: To gain weight, focus on a balanced diet with an emphasis on protein and healthy fats. Consult with a nutritionist for personalized advice.</p>
+              <iframe className="responsive-iframe" src="https://www.youtube.com/embed/oOXn1RrZ0eU" title="Weight Gain Tip 1" frameborder="0" allowfullscreen></iframe>
+              <iframe className="responsive-iframe" src="https://www.youtube.com/embed/astPqpXaxkQ" title="Weight Gain Tip 2" frameborder="0" allowfullscreen></iframe>
+              <iframe className="responsive-iframe" src="https://www.youtube.com/embed/KM3ko1Z4amA" title="Weight Gain Tip 3" frameborder="0" allowfullscreen></iframe>
+            </div>`
+
       case 'Normal Weight':
         return 'Interesting Fact: Did you know that maintaining a healthy weight reduces the risk of various health issues and improves overall well-being?';
       case 'Overweight':
-        return 'Tips: To lose weight, consider incorporating regular exercise and a calorie-controlled diet. Consult with a healthcare professional for personalized advice.';
+        return `<div className="mx-auto">
+            <p>Tips: To lose weight, consider incorporating regular exercise and a calorie-controlled diet. Consult with a healthcare professional for personalized advice.</p>
+            <iframe className="responsive-iframe" src="https://www.youtube.com/embed/jvJuJpCtyic" title="Weight Loss Tip 1" frameborder="0" allowfullscreen></iframe>
+            <iframe className="responsive-iframe" src="https://www.youtube.com/embed/ygAC0yJp1KU" title="Weight Loss Tip 2" frameborder="0" allowfullscreen></iframe>
+            <iframe className="responsive-iframe" src="https://www.youtube.com/embed/Tuz9YGtfTII" title="Weight Loss Tip 3" frameborder="0" allowfullscreen></iframe>
+            </div>`
+
       case 'Obese':
-        return 'Tips: Obesity may increase the risk of various health conditions. Consider seeking guidance from a healthcare professional for a tailored weight management plan.';
+        return `<div className="mx-auto">
+            <p>Tips: Obesity may increase the risk of various health conditions. Consider seeking guidance from a healthcare professional for a tailored weight management plan.</p>
+            <iframe className="responsive-iframe" src="https://www.youtube.com/embed/BSnnDfSNhyU" title="Obesity Tip 1" frameborder="0" allowfullscreen></iframe>
+            <iframe className="responsive-iframe" src="https://www.youtube.com/embed/ymjNF6lPUaY" title="Obesity Tip 2" frameborder="0" allowfullscreen></iframe>
+            <iframe className="responsive-iframe" src="https://www.youtube.com/embed/YufejdqeMYk" title="Obesity Tip 3" frameborder="0" allowfullscreen></iframe>
+          </div>`
       default:
         return '';
     }
   };
 
   return (
-    <div className='bg-[#282c34] flex flex-col items-center justify-center min-h-screen'>
+    <div className='bg-[#282c34] md:pt-28 md:pb-28 pt-20 pb-24 flex flex-col items-center justify-center min-h-screen'>
       <div className="p-4 z-10 w-4/5 md:w-6/12 mx-auto backdrop-blur bg-cyan-600/30 shadow-md rounded-md">
         <h2 className="text-3xl text-white text-center font-semibold mb-4">BMI Buddy</h2>
         <form>
@@ -119,7 +135,7 @@ function BMICalculator() {
           <div className="mt-4">
             <p className="text-xl font-semibold text-white">Your BMI is: {bmi.toFixed(2)}</p>
             <p className="text-lg text-white">BMI Category: {bmiCategory}</p>
-            <p className="text-sm text-white">{getTips(bmiCategory)}</p>
+            <div className="text-sm text-white" dangerouslySetInnerHTML={{ __html: getTips(bmiCategory) }}></div>
           </div>
         )}
       </div>
